@@ -1,24 +1,8 @@
 export const STORAGE_KEYS = {
   answers: "faith-test-answers",
   participantCounted: "faith-test-participant-counted",
-  participantCount: "faith-test-participant-count",
   paid: (type: string) => `paid_${type}`,
 } as const;
-
-export const INITIAL_PARTICIPANT_COUNT = 13_000;
-
-export function getParticipantCount(): number {
-  if (typeof window === "undefined") return INITIAL_PARTICIPANT_COUNT;
-  const stored = localStorage.getItem(STORAGE_KEYS.participantCount);
-  if (stored) return parseInt(stored, 10) || INITIAL_PARTICIPANT_COUNT;
-  return INITIAL_PARTICIPANT_COUNT;
-}
-
-export function incrementParticipantCount(): number {
-  const next = getParticipantCount() + 1;
-  localStorage.setItem(STORAGE_KEYS.participantCount, String(next));
-  return next;
-}
 
 export function isPaid(type: string): boolean {
   if (typeof window === "undefined") return false;

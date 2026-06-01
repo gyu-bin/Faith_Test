@@ -1,13 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getParticipantCount } from "@/lib/storage";
 
 export function ParticipantCount() {
   const [count, setCount] = useState<number | null>(null);
 
   useEffect(() => {
-    setCount(getParticipantCount());
+    fetch("/api/participants", { cache: "no-store" })
+      .then((r) => r.json())
+      .then((data: { count?: number }) => {
+        setCount(typeof data.count === "number" ? data.count : 0);
+      })
+      .catch(() => setCount(0));
   }, []);
 
   if (count === null) {

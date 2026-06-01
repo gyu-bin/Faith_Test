@@ -8,12 +8,7 @@ import { PageTransition } from "@/components/PageTransition";
 import { PrimaryButton } from "@/components/PrimaryButton";
 import { questions } from "@/lib/questions";
 import { getResultFromAnswers } from "@/lib/scoring";
-import {
-  STORAGE_KEYS,
-  getStoredAnswers,
-  incrementParticipantCount,
-  saveAnswers,
-} from "@/lib/storage";
+import { STORAGE_KEYS, getStoredAnswers, saveAnswers } from "@/lib/storage";
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -50,8 +45,8 @@ export default function QuizPage() {
       setIndex(firstUnanswered >= 0 ? firstUnanswered : total - 1);
     }
     if (!localStorage.getItem(STORAGE_KEYS.participantCounted)) {
-      incrementParticipantCount();
       localStorage.setItem(STORAGE_KEYS.participantCounted, "true");
+      fetch("/api/participants", { method: "POST" }).catch(() => {});
     }
     setHydrated(true);
   }, [total]);

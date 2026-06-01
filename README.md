@@ -27,6 +27,7 @@
 - 🎨 크림 · 골드 톤의 따뜻한 디자인
 - 📤 카카오톡 공유 · OG 미리보기 이미지 지원
 - 🔓 전체 결과(궁합 · 주의 패턴 · 훈련 팁) 무료 열람
+- 📊 **실제 참여자 수** (Upstash Redis · 테스트 시작 시 +1)
 
 ---
 
@@ -83,6 +84,8 @@ npm run dev
 |:---|:---|
 | `NEXT_PUBLIC_BASE_URL` | 배포 URL (카카오·OG 미리보기용) |
 | `NEXT_PUBLIC_KAKAO_JS_KEY` | [카카오 JavaScript 키](https://developers.kakao.com/) — 공유 버튼 |
+| `UPSTASH_REDIS_REST_URL` | 참여자 수 카운터 ([Upstash Redis](https://vercel.com/marketplace/upstash)) |
+| `UPSTASH_REDIS_REST_TOKEN` | ↑ 연동 시 Vercel에 자동 주입 |
 
 ---
 
@@ -125,6 +128,9 @@ src/
 1. 이 저장소를 Vercel에 Import
 2. Environment Variables에 `NEXT_PUBLIC_BASE_URL` = `https://your-domain.vercel.app` 설정
 3. (선택) `NEXT_PUBLIC_KAKAO_JS_KEY` 추가
+4. **참여자 수:** Vercel 대시보드 → **Storage** → [Upstash Redis](https://vercel.com/marketplace/upstash) 연동 → 프로젝트에 연결 후 재배포
+
+> Redis 미연동 시 참여자 수는 `0`으로 표시됩니다 (가짜 13,000명 없음).
 
 ### CLI
 
