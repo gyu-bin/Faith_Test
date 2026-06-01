@@ -11,7 +11,11 @@ export function TypePreviewGrid() {
             key={key}
             className="flex flex-col items-center justify-center rounded-inner border border-gold-light bg-cream px-2 py-3 text-center md:px-3 md:py-4 lg:py-5"
           >
-            <span className="text-2xl md:text-3xl lg:text-4xl" aria-hidden>
+            <span
+              className="text-2xl md:text-3xl lg:text-4xl"
+              aria-hidden
+              suppressHydrationWarning
+            >
               {t.emoji}
             </span>
             <span className="mt-1.5 text-[11px] font-medium leading-tight text-ink md:mt-2 md:text-xs lg:text-sm">

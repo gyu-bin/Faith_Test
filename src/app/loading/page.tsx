@@ -1,22 +1,26 @@
 "use client";
 
-import { useEffect, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { AppShell } from "@/components/AppShell";
 import { isValidTypeKey } from "@/lib/faithTypes";
+import type { TypeKey } from "@/lib/types";
 
-function LoadingContent() {
+function resolveTypeFromSearch(search: string): TypeKey {
+  const raw = new URLSearchParams(search).get("type") ?? "worship";
+  return isValidTypeKey(raw) ? raw : "worship";
+}
+
+export default function LoadingPage() {
   const router = useRouter();
-  const params = useSearchParams();
-  const type = params.get("type") ?? "worship";
-  const valid = isValidTypeKey(type) ? type : "worship";
 
   useEffect(() => {
+    const valid = resolveTypeFromSearch(window.location.search);
     const timer = setTimeout(() => {
       router.replace(`/result/${valid}`);
     }, 2000);
     return () => clearTimeout(timer);
-  }, [router, valid]);
+  }, [router]);
 
   return (
     <AppShell>
@@ -52,21 +56,5 @@ function LoadingContent() {
         </div>
       </div>
     </AppShell>
-  );
-}
-
-export default function LoadingPage() {
-  return (
-    <Suspense
-      fallback={
-        <AppShell>
-          <div className="flex min-h-[70dvh] items-center justify-center text-ink-mute">
-            불러오는 중…
-          </div>
-        </AppShell>
-      }
-    >
-      <LoadingContent />
-    </Suspense>
   );
 }

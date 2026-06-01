@@ -5,8 +5,10 @@ import { ParticipantCount } from "@/components/ParticipantCount";
 import { PrimaryButton } from "@/components/PrimaryButton";
 import { TypePreviewGrid } from "@/components/TypePreviewGrid";
 import { Card } from "@/components/Card";
+import { getHomeParticipantDisplayCount } from "@/lib/participantDisplay";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const participantCount = await getHomeParticipantDisplayCount();
   return (
     <AppShell className="md:flex md:min-h-dvh md:flex-col md:justify-center md:max-w-xl md:px-8 md:pb-16 md:pt-10 lg:max-w-2xl lg:px-10 lg:pt-12">
       <PageTransition>
@@ -32,7 +34,10 @@ export default function HomePage() {
         </Card>
 
         <div className="mt-6 md:mt-8">
-          <ParticipantCount className="md:text-base" />
+          <ParticipantCount
+            initialCount={participantCount}
+            className="md:text-base"
+          />
         </div>
 
         <div className="mt-8 md:mt-10 lg:mt-12">

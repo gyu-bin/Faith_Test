@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { faithTypes, getFaithType, isValidTypeKey } from "@/lib/faithTypes";
@@ -62,17 +61,5 @@ export default function ResultPage({ params }: Props) {
 
   const faithType = faithTypes[params.type];
 
-  return (
-    <>
-      <Suspense
-        fallback={
-          <div className="mx-auto flex min-h-dvh max-w-app items-center justify-center text-ink-mute">
-            결과 불러오는 중…
-          </div>
-        }
-      >
-        <ResultClient faithType={faithType} />
-      </Suspense>
-    </>
-  );
+  return <ResultClient faithType={faithType} />;
 }

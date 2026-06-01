@@ -1,38 +1,26 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  TEMP_DISPLAY_WEEKLY_ONLY,
-  getWeeklyFallbackCount,
-} from "@/lib/displayParticipantCount";
+import { resolveParticipantDisplayCount } from "@/lib/participantDisplay";
+import { getWeeklyFallbackCount } from "@/lib/displayParticipantCount";
 
-function resolveDisplayCount(live: boolean, redisCount: number): number {
-  const fallback = getWeeklyFallbackCount();
-  if (TEMP_DISPLAY_WEEKLY_ONLY) return fallback;
-  if (live && redisCount > 0) return redisCount;
-  return fallback;
-}
+type Props = {
+  initialCount: number;
+  className?: string;
+};
 
-export function ParticipantCount({ className = "" }: { className?: string }) {
-  const [count, setCount] = useState<number | null>(null);
+export function ParticipantCount({ initialCount, className = "" }: Props) {
+  const [count, setCount] = useState(initialCount);
 
   useEffect(() => {
     fetch("/api/participants", { cache: "no-store" })
       .then((r) => r.json())
       .then((data: { count?: number; live?: boolean }) => {
         const redis = typeof data.count === "number" ? data.count : 0;
-        setCount(resolveDisplayCount(Boolean(data.live), redis));
+        setCount(resolveParticipantDisplayCount(Boolean(data.live), redis));
       })
       .catch(() => setCount(getWeeklyFallbackCount()));
   }, []);
-
-  if (count === null) {
-    return (
-      <p className={`text-center text-sm text-ink-mute ${className}`}>
-        참여자 수 불러오는 중…
-      </p>
-    );
-  }
 
   return (
     <p className={`text-center text-sm text-ink-mute ${className}`}>

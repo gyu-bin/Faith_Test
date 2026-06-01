@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { AppShell } from "@/components/AppShell";
 import { Card } from "@/components/Card";
 import { ShareResultButton } from "@/components/ShareResultButton";
@@ -32,17 +31,18 @@ function LockedOverlay({ children }: { children: React.ReactNode }) {
 }
 
 export function ResultClient({ faithType }: Props) {
-  const searchParams = useSearchParams();
   const insightsRef = useRef<HTMLElement>(null);
   const [unlocked, setUnlocked] = useState(false);
 
   const descParagraphs = faithType.desc.split(/\n\n+/);
 
   useEffect(() => {
-    if (searchParams.get("paid") === "true" || isPaid(faithType.key)) {
+    const paidFromQuery =
+      new URLSearchParams(window.location.search).get("paid") === "true";
+    if (paidFromQuery || isPaid(faithType.key)) {
       setUnlocked(true);
     }
-  }, [searchParams, faithType.key]);
+  }, [faithType.key]);
 
   const handleUnlock = () => {
     setPaid(faithType.key);
