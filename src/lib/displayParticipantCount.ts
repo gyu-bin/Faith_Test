@@ -1,3 +1,9 @@
+/**
+ * 임시: true → 화면에는 주간 기준 인원만 표시 (Redis는 퀴즈 시 백그라운드 집계)
+ * 실제 Redis 숫자를 쓰려면 false 로 변경
+ */
+export const TEMP_DISPLAY_WEEKLY_ONLY = true;
+
 /** Redis 없을 때: 서비스 오픈 주차 × 100명 + 기준 인원 */
 export const FALLBACK_BASE = 24;
 export const FALLBACK_WEEKLY_INCREMENT = 100;
