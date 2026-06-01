@@ -13,7 +13,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?style=flat-square&logo=vercel&logoColor=white)](https://vercel.com/)
 
-[테스트 시작하기](#-빠른-시작) · [6가지 유형](#-6가지-신앙-유형) · [배포](#-배포)
+**[🌐 라이브 데모](https://faith-test-mu.vercel.app)** · [GitHub](https://github.com/gyu-bin/Faith_Test) · [6가지 유형](#-6가지-신앙-유형)
 
 </div>
 
