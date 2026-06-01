@@ -3,25 +3,64 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --cream: #faf8f3;
+  --cream2: #f3efe5;
+  --gold: #b8935a;
+  --gold-light: #e8d5b0;
+  --gold-pale: #f7f0e4;
+  --brown: #6b4f2a;
+  --brown-light: #9a7a55;
+  --ink: #2a2118;
+  --ink-soft: #5c4a34;
+  --ink-mute: #9c8e80;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--ink-soft);
+  background: var(--cream);
+  font-family: var(--font-pretendard), system-ui, sans-serif;
+  min-height: 100dvh;
+}
+
+.font-serif {
+  font-family: var(--font-noto-serif), "Noto Serif KR", serif;
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .page-enter {
+    animation: pageEnter 0.35s ease forwards;
   }
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 1.2s ease-in-out infinite;
 }
