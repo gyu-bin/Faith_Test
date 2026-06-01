@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Serif_KR } from "next/font/google";
-import { getSiteUrl } from "@/lib/siteUrl";
+import { absoluteUrl, getSiteUrl } from "@/lib/siteUrl";
 import "./globals.css";
 
 const notoSerif = Noto_Serif_KR({
@@ -22,7 +22,8 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/opengraph-image",
+        url: absoluteUrl("/opengraph-image"),
+        secureUrl: absoluteUrl("/opengraph-image"),
         width: 1200,
         height: 630,
         alt: "나는 어떤 신앙인일까?",
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "나는 어떤 신앙인일까?",
     description: "12개의 질문으로 알아보는 나의 신앙 성향",
-    images: ["/opengraph-image"],
+    images: [absoluteUrl("/opengraph-image")],
   },
 };
 

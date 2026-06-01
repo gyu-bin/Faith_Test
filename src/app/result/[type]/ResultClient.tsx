@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { AppShell } from "@/components/AppShell";
 import { Card } from "@/components/Card";
 import { ShareResultButton } from "@/components/ShareResultButton";
@@ -10,7 +10,7 @@ import { PrimaryButton } from "@/components/PrimaryButton";
 import { MatchTypeCard } from "@/components/result/MatchTypeCard";
 import { ResultHero } from "@/components/result/ResultHero";
 import { ShareResultCard } from "@/components/result/ShareResultCard";
-import { isPaid, setPaid } from "@/lib/storage";
+import { clearQuizProgress, isPaid, setPaid } from "@/lib/storage";
 import type { FaithType } from "@/lib/types";
 
 type Props = {
@@ -31,6 +31,7 @@ function LockedOverlay({ children }: { children: React.ReactNode }) {
 }
 
 export function ResultClient({ faithType }: Props) {
+  const router = useRouter();
   const insightsRef = useRef<HTMLElement>(null);
   const [unlocked, setUnlocked] = useState(false);
 
@@ -50,6 +51,15 @@ export function ResultClient({ faithType }: Props) {
     requestAnimationFrame(() => {
       insightsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
+  };
+
+  const handleRetest = () => {
+    clearQuizProgress();
+    router.push("/quiz");
+  };
+
+  const handleGoHome = () => {
+    router.push("/");
   };
 
   return (
@@ -178,19 +188,14 @@ export function ResultClient({ faithType }: Props) {
           <ShareResultButton faithType={faithType} />
         </div>
 
-        <p className="mt-8 text-center">
-          <Link
-            href="/"
-            className="text-sm text-brown-light underline-offset-4 hover:underline"
-            onClick={() => {
-              if (typeof window !== "undefined") {
-                localStorage.removeItem("faith-test-answers");
-              }
-            }}
-          >
+        <div className="mt-8 space-y-3 border-t border-gold-light pt-8">
+          <PrimaryButton type="button" variant="outline" onClick={handleRetest}>
             다시 테스트하기
-          </Link>
-        </p>
+          </PrimaryButton>
+          <PrimaryButton type="button" variant="ghost" onClick={handleGoHome}>
+            홈으로 가기
+          </PrimaryButton>
+        </div>
       </PageTransition>
     </AppShell>
   );

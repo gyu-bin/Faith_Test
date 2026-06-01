@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { faithTypes, getFaithType, isValidTypeKey } from "@/lib/faithTypes";
+import { ogImageUrlForType } from "@/lib/ogImage";
+import { absoluteUrl } from "@/lib/siteUrl";
 import { ResultClient } from "./ResultClient";
 
 type Props = { params: { type: string } };
@@ -18,22 +20,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = `나는 ${t.name}!`;
   const description = t.shortDesc;
   const path = `/result/${params.type}`;
-  const ogImagePath = `${path}/opengraph-image`;
+  const ogImage = absoluteUrl(ogImageUrlForType(params.type));
 
   return {
     title: `${title} — 나는 어떤 신앙인일까?`,
     description,
-    alternates: { canonical: path },
+    alternates: { canonical: absoluteUrl(path) },
     openGraph: {
       title,
       description,
-      url: path,
+      url: absoluteUrl(path),
       siteName: "나는 어떤 신앙인일까?",
       locale: "ko_KR",
       type: "website",
       images: [
         {
-          url: ogImagePath,
+          url: ogImage,
+          secureUrl: ogImage,
           width: 1200,
           height: 630,
           alt: `${title} — ${description}`,
@@ -45,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       title,
       description,
-      images: [ogImagePath],
+      images: [ogImage],
     },
     other: {
       "og:image:width": "1200",

@@ -28,3 +28,9 @@ export function getStoredAnswers(): number[] | null {
 export function saveAnswers(answers: number[]): void {
   localStorage.setItem(STORAGE_KEYS.answers, JSON.stringify(answers));
 }
+
+/** 퀴즈 진행·답안 초기화 (다시 테스트하기) */
+export function clearQuizProgress(): void {
+  if (typeof window === "undefined") return;
+  localStorage.removeItem(STORAGE_KEYS.answers);
+}
