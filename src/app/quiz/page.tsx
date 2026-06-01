@@ -8,7 +8,12 @@ import { PageTransition } from "@/components/PageTransition";
 import { PrimaryButton } from "@/components/PrimaryButton";
 import { questions } from "@/lib/questions";
 import { getResultFromAnswers } from "@/lib/scoring";
-import { STORAGE_KEYS, getStoredAnswers, saveAnswers } from "@/lib/storage";
+import {
+  STORAGE_KEYS,
+  clearQuizProgress,
+  getStoredAnswers,
+  saveAnswers,
+} from "@/lib/storage";
 
 const LETTERS = ["A", "B", "C", "D"];
 
@@ -40,9 +45,15 @@ export default function QuizPage() {
   useEffect(() => {
     const stored = getStoredAnswers();
     if (stored && stored.length === total) {
-      setAnswers(stored);
       const firstUnanswered = stored.findIndex((a) => a < 0);
-      setIndex(firstUnanswered >= 0 ? firstUnanswered : total - 1);
+      if (firstUnanswered >= 0) {
+        // 중간까지 풀다 나간 경우만 이어하기
+        setAnswers(stored);
+        setIndex(firstUnanswered);
+      } else {
+        // 이미 12문항 모두 선택된 상태 — 새 시도로 간주
+        clearQuizProgress();
+      }
     }
     if (!localStorage.getItem(STORAGE_KEYS.participantCounted)) {
       localStorage.setItem(STORAGE_KEYS.participantCounted, "true");

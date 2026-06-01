@@ -2,7 +2,7 @@ import { AppShell } from "@/components/AppShell";
 import { ChurchIcon } from "@/components/ChurchIcon";
 import { PageTransition } from "@/components/PageTransition";
 import { ParticipantCount } from "@/components/ParticipantCount";
-import { PrimaryButton } from "@/components/PrimaryButton";
+import { StartQuizButton } from "@/components/StartQuizButton";
 import { TypePreviewGrid } from "@/components/TypePreviewGrid";
 import { Card } from "@/components/Card";
 import { getHomeParticipantDisplayCount } from "@/lib/participantDisplay";
@@ -41,12 +41,9 @@ export default async function HomePage() {
         </div>
 
         <div className="mt-8 md:mt-10 lg:mt-12">
-          <PrimaryButton
-            href="/quiz"
-            className="md:py-4 md:text-base lg:py-[18px] lg:text-[17px]"
-          >
+          <StartQuizButton className="md:py-4 md:text-base lg:py-[18px] lg:text-[17px]">
             테스트 시작하기
-          </PrimaryButton>
+          </StartQuizButton>
         </div>
 
         <p className="mt-6 text-center text-xs leading-relaxed text-ink-mute md:mt-8 md:text-sm">

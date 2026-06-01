@@ -7,7 +7,6 @@ import { Card } from "@/components/Card";
 import { ShareResultButton } from "@/components/ShareResultButton";
 import { PageTransition } from "@/components/PageTransition";
 import { PrimaryButton } from "@/components/PrimaryButton";
-import { MatchTypeCard } from "@/components/result/MatchTypeCard";
 import { ResultHero } from "@/components/result/ResultHero";
 import { ShareResultCard } from "@/components/result/ShareResultCard";
 import { clearQuizProgress, isPaid, setPaid } from "@/lib/storage";
@@ -99,8 +98,6 @@ export function ResultClient({ faithType }: Props) {
 
           {unlocked ? (
             <>
-              <MatchTypeCard faithType={faithType} />
-
               <Card>
                 <div className="mb-2 flex items-center gap-2">
                   <span className="text-xl" aria-hidden>
@@ -136,16 +133,6 @@ export function ResultClient({ faithType }: Props) {
           ) : (
             <>
               <Card>
-                <h3 className="text-sm font-semibold text-gold">궁합 유형</h3>
-                <LockedOverlay>
-                  <p className="font-serif text-lg text-ink">궁합 유형 공개</p>
-                  <p className="mt-2 text-sm text-ink-mute">
-                    함께 성장하는 법이 여기에 표시됩니다.
-                  </p>
-                </LockedOverlay>
-              </Card>
-
-              <Card>
                 <h3 className="text-sm font-semibold text-gold">
                   주의할 신앙 패턴
                 </h3>
@@ -174,7 +161,7 @@ export function ResultClient({ faithType }: Props) {
                   {faithType.emoji}
                 </p>
                 <p className="mt-2 text-sm text-ink-mute">
-                  결과 카드 이미지 · 궁합 · 훈련 팁
+                  결과 카드 이미지 · 훈련 팁
                 </p>
               </div>
             </>

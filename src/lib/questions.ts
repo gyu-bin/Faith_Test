@@ -72,7 +72,7 @@ export const questions: Question[] = [
     scores: ["worship", "word", "prayer", "mission"],
   },
   {
-    text: "신앙적으로 쉬고 싶을 때 나는?",
+    text: "쉬고 싶을 때 나를 채우는 방법은?",
     opts: [
       "CCM 플레이리스트 틀어두고 쉰다",
       "크리스천 책이나 설교 영상을 본다",
