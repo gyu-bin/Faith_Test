@@ -9,7 +9,7 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const variants = {
   primary:
-    "bg-ink text-cream hover:bg-brown active:scale-[0.98] disabled:opacity-40 disabled:pointer-events-none",
+    "bg-ink text-cream hover:bg-brown dark:hover:bg-gold dark:hover:text-ink active:scale-[0.98] disabled:opacity-40 disabled:pointer-events-none",
   outline:
     "border-2 border-gold text-ink bg-transparent hover:bg-gold-pale active:scale-[0.98]",
   ghost: "text-brown-light hover:text-ink underline-offset-4 hover:underline",

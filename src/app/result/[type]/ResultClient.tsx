@@ -20,7 +20,7 @@ function LockedOverlay({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative overflow-hidden rounded-inner">
       <div className="select-none blur-[6px]">{children}</div>
-      <div className="absolute inset-0 flex items-center justify-center bg-cream/70">
+      <div className="absolute inset-0 flex items-center justify-center bg-cream/80 dark:bg-cream/90">
         <span className="rounded-full border border-gold bg-cream px-3 py-1.5 text-xs font-semibold text-gold">
           🔒 전체 결과에서 열람
         </span>
@@ -78,6 +78,55 @@ export function ResultClient({ faithType }: Props) {
         </section>
 
         <Card className="mt-5">
+          <div className="mb-3 flex items-center gap-2">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gold-pale text-lg">
+              ☕
+            </span>
+            <h2 className="font-serif text-lg font-semibold text-ink">
+              일상 속 나의 모습
+            </h2>
+          </div>
+          <ul className="space-y-2 text-[15px] leading-relaxed text-ink-soft">
+            {faithType.dailyTraits.map((item, i) => (
+              <li key={i} className="flex gap-2">
+                <span className="shrink-0 text-gold">·</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </Card>
+
+        <Card className="mt-4">
+          <div className="mb-3 flex items-center gap-2">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gold-pale text-lg">
+              ⛪
+            </span>
+            <h2 className="font-serif text-lg font-semibold text-ink">
+              교회·소그룹에서의 나
+            </h2>
+          </div>
+          <p className="text-[15px] leading-relaxed text-ink-soft">
+            {faithType.churchScene}
+          </p>
+        </Card>
+
+        <Card className="mt-4 border-gold/30 bg-gold-pale/40 dark:bg-gold-pale/20">
+          <div className="mb-3 flex items-center gap-2">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gold-pale text-lg">
+              😄
+            </span>
+            <h2 className="font-serif text-lg font-semibold text-ink">
+              재미있는 포인트
+            </h2>
+          </div>
+          <ul className="space-y-2.5 text-[15px] leading-relaxed text-ink-soft">
+            {faithType.funFacts.map((item, i) => (
+              <li key={i}>{item}</li>
+            ))}
+          </ul>
+        </Card>
+
+        <Card className="mt-4">
           <div className="mb-3 flex items-center gap-2">
             <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gold-pale text-lg">
               ✨
@@ -161,7 +210,7 @@ export function ResultClient({ faithType }: Props) {
                   {faithType.emoji}
                 </p>
                 <p className="mt-2 text-sm text-ink-mute">
-                  결과 카드 이미지 · 훈련 팁
+                  주의 패턴 · 훈련 팁 · 공유 카드
                 </p>
               </div>
             </>

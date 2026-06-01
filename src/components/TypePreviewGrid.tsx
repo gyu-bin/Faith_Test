@@ -9,7 +9,7 @@ export function TypePreviewGrid() {
         return (
           <div
             key={key}
-            className="flex flex-col items-center justify-center rounded-inner border border-gold-light bg-cream px-2 py-3 text-center md:px-3 md:py-4 lg:py-5"
+            className="flex flex-col items-center justify-center rounded-inner border border-gold-light bg-cream2 px-2 py-3 text-center md:px-3 md:py-4 lg:py-5"
           >
             <span
               className="text-2xl md:text-3xl lg:text-4xl"

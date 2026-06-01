@@ -24,7 +24,7 @@ export function ResultHero({ faithType }: Props) {
 
         <div className="relative mx-auto mt-4 flex justify-center">
           <div
-            className={`relative flex h-[148px] w-[148px] items-center justify-center rounded-full border-[3px] bg-cream/90 shadow-md ${theme.ring}`}
+            className={`relative flex h-[148px] w-[148px] items-center justify-center rounded-full border-[3px] bg-cream2/95 shadow-md ${theme.ring}`}
           >
             <span className="text-[72px] leading-none" aria-hidden>
               {faithType.emoji}
@@ -52,6 +52,9 @@ export function ResultHero({ faithType }: Props) {
         </h1>
         <p className="relative mt-2 text-center text-[15px] leading-relaxed text-ink-soft">
           {faithType.shortDesc}
+        </p>
+        <p className="relative mt-3 text-center text-sm italic leading-relaxed text-brown-light">
+          {faithType.tagline}
         </p>
       </div>
     </header>

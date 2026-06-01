@@ -13,6 +13,22 @@
   --ink: #2a2118;
   --ink-soft: #5c4a34;
   --ink-mute: #9c8e80;
+  --shadow-color: rgba(42, 33, 24, 0.08);
+}
+
+.dark {
+  color-scheme: dark;
+  --cream: #141210;
+  --cream2: #1f1c18;
+  --gold: #d4ad6a;
+  --gold-light: #3d3528;
+  --gold-pale: #2a241c;
+  --brown: #e0c99a;
+  --brown-light: #c9a86a;
+  --ink: #f5f0e8;
+  --ink-soft: #d4cdc0;
+  --ink-mute: #9a9080;
+  --shadow-color: rgba(0, 0, 0, 0.35);
 }
 
 * {
@@ -28,6 +44,9 @@ body {
   background: var(--cream);
   font-family: var(--font-pretendard), system-ui, sans-serif;
   min-height: 100dvh;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
 }
 
 .font-serif {
@@ -37,6 +56,10 @@ body {
 @layer utilities {
   .page-enter {
     animation: pageEnter 0.35s ease forwards;
+  }
+
+  .shadow-theme {
+    box-shadow: 0 1px 3px var(--shadow-color);
   }
 }
 

@@ -108,7 +108,11 @@ export default function QuizPage() {
 
   const goPrev = () => {
     clearAdvanceTimer();
-    if (index > 0) setIndex(index - 1);
+    if (index === 0) {
+      router.push("/");
+      return;
+    }
+    setIndex(index - 1);
   };
 
   if (!hydrated) {
@@ -165,7 +169,7 @@ export default function QuizPage() {
                     className={`flex w-full items-start gap-3 rounded-inner border px-3.5 py-3.5 text-left text-[15px] transition-all duration-200 disabled:pointer-events-none ${
                       isSelected
                         ? "border-ink bg-ink text-cream"
-                        : "border-gold-light bg-cream hover:border-gold hover:bg-gold-pale text-ink-soft"
+                        : "border-gold-light bg-cream2 hover:border-gold hover:bg-gold-pale text-ink-soft"
                     }`}
                   >
                     <span
@@ -189,10 +193,10 @@ export default function QuizPage() {
           <PrimaryButton
             variant="outline"
             onClick={goPrev}
-            disabled={index === 0 || advancing}
+            disabled={advancing}
             className="flex-1 !w-auto"
           >
-            뒤로
+            {index === 0 ? "홈으로" : "뒤로"}
           </PrimaryButton>
           <PrimaryButton
             onClick={goNext}
