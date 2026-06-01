@@ -3,7 +3,6 @@
 import { useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { AppShell } from "@/components/AppShell";
-import { faithTypes } from "@/lib/faithTypes";
 import { isValidTypeKey } from "@/lib/faithTypes";
 
 function LoadingContent() {
@@ -11,7 +10,6 @@ function LoadingContent() {
   const params = useSearchParams();
   const type = params.get("type") ?? "worship";
   const valid = isValidTypeKey(type) ? type : "worship";
-  const t = faithTypes[valid];
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -23,14 +21,27 @@ function LoadingContent() {
   return (
     <AppShell>
       <div className="flex min-h-[70dvh] flex-col items-center justify-center text-center page-enter">
-        <span className="text-5xl animate-pulse-soft">{t.emoji}</span>
-        <p className="font-serif mt-6 text-xl font-semibold text-ink">
+        <div className="relative flex h-24 w-24 items-center justify-center">
+          <span
+            className="absolute inset-0 rounded-full border-2 border-gold-light animate-pulse-soft"
+            aria-hidden
+          />
+          <span
+            className="absolute inset-2 rounded-full border border-gold/40 animate-pulse-soft"
+            style={{ animationDelay: "0.15s" }}
+            aria-hidden
+          />
+          <span className="text-4xl text-gold" aria-hidden>
+            ✦
+          </span>
+        </div>
+        <p className="font-serif mt-8 text-xl font-semibold text-ink">
           당신의 신앙 유형을
           <br />
           분석하고 있어요…
         </p>
-        <p className="mt-3 text-sm text-ink-mute">{t.name}</p>
-        <div className="mt-8 flex gap-1">
+        <p className="mt-3 text-sm text-ink-mute">잠시만 기다려 주세요</p>
+        <div className="mt-8 flex gap-1.5">
           {[0, 1, 2].map((i) => (
             <span
               key={i}

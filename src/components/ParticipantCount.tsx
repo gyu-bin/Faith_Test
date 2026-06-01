@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { getWeeklyFallbackCount } from "@/lib/displayParticipantCount";
 
 export function ParticipantCount() {
   const [count, setCount] = useState<number | null>(null);
@@ -8,10 +9,14 @@ export function ParticipantCount() {
   useEffect(() => {
     fetch("/api/participants", { cache: "no-store" })
       .then((r) => r.json())
-      .then((data: { count?: number }) => {
-        setCount(typeof data.count === "number" ? data.count : 0);
+      .then((data: { count?: number; live?: boolean }) => {
+        if (data.live && typeof data.count === "number") {
+          setCount(data.count);
+          return;
+        }
+        setCount(getWeeklyFallbackCount());
       })
-      .catch(() => setCount(0));
+      .catch(() => setCount(getWeeklyFallbackCount()));
   }, []);
 
   if (count === null) {
@@ -23,7 +28,7 @@ export function ParticipantCount() {
   return (
     <p className="text-center text-sm text-ink-mute">
       지금까지{" "}
-      <span className="font-semibold text-gold">
+      <span className="font-semibold text-gold tabular-nums">
         {count.toLocaleString("ko-KR")}
       </span>
       명이 참여했어요

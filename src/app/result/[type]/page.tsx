@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { faithTypes, getFaithType, isValidTypeKey } from "@/lib/faithTypes";
 import { ResultClient } from "./ResultClient";
-import { KakaoScript } from "@/components/KakaoScript";
 
 type Props = { params: { type: string } };
 
@@ -65,7 +64,6 @@ export default function ResultPage({ params }: Props) {
 
   return (
     <>
-      <KakaoScript />
       <Suspense
         fallback={
           <div className="mx-auto flex min-h-dvh max-w-app items-center justify-center text-ink-mute">

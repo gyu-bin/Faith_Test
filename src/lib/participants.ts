@@ -1,8 +1,12 @@
 import { Redis } from "@upstash/redis";
+import { isRedisConfigured } from "./displayParticipantCount";
 
 const COUNT_KEY = "faith-test:participants";
 
+export { isRedisConfigured };
+
 function getRedis(): Redis | null {
+  if (!isRedisConfigured()) return null;
   const url = process.env.UPSTASH_REDIS_REST_URL ?? process.env.KV_REST_API_URL;
   const token =
     process.env.UPSTASH_REDIS_REST_TOKEN ?? process.env.KV_REST_API_TOKEN;

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { AppShell } from "@/components/AppShell";
 import { Card } from "@/components/Card";
-import { KakaoShareButton } from "@/components/KakaoShareButton";
+import { ShareResultButton } from "@/components/ShareResultButton";
 import { PageTransition } from "@/components/PageTransition";
 import { PrimaryButton } from "@/components/PrimaryButton";
 import { MatchTypeCard } from "@/components/result/MatchTypeCard";
@@ -175,7 +175,7 @@ export function ResultClient({ faithType }: Props) {
           {!unlocked && (
             <PrimaryButton onClick={handleUnlock}>전체 결과 보기</PrimaryButton>
           )}
-          <KakaoShareButton faithType={faithType} />
+          <ShareResultButton faithType={faithType} />
         </div>
 
         <p className="mt-8 text-center">
